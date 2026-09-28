@@ -86,6 +86,14 @@ h2 .n{font-size:var(--f-small);color:var(--ink3);font-weight:700;margin-left:6px
 .tel .call:active{background:var(--red-dark)}
 .tel .nophone{margin-top:10px;font-size:var(--f-small);color:var(--ink3)}
 footer{max-width:var(--shell);margin:24px auto 0;padding:0 var(--pad);font-size:var(--f-tiny);color:var(--ink3)}
+
+/* 下拉重新整理：關掉瀏覽器自帶的，改用頁面自己的一套，兩種開法（瀏覽器、主畫面）行為一致 */
+html,body{overscroll-behavior-y:contain}
+.ptr{position:fixed;left:50%;top:calc(env(safe-area-inset-top) - 48px);z-index:100;width:170px;margin-left:-85px;height:38px;
+  border-radius:999px;background:#1d1d22;border:1px solid #33333a;color:#b5b5bd;font-size:14px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.ptr.back{transition:transform .2s}
+.ptr.ready{color:#fff;border-color:#ff4d5a;background:#3a1b1f}
 </style>
 </head>
 <body>
@@ -102,8 +110,8 @@ footer{max-width:var(--shell);margin:24px auto 0;padding:0 var(--pad);font-size:
   <section class="view" id="all"></section>
   <section class="view" id="tel"></section>
 </main>
-<footer>資料：Hachuu_雙城快閃_工作進度甘特圖.xlsx（2026-09-28 14:55 產生）。完成狀態以產生當下工作簿的勾選為準。</footer>
-<script id="data" type="application/json">{"city": "台中", "eventDate": "2026-12-11", "eventEnd": "2026-12-13", "eventName": "台中快閃活動", "tasks": [{"no": 1, "city": "共同", "item": "場地與品牌待確認事項", "owner": "Cindy", "start": "2026-09-29", "end": "2026-10-16", "done": false, "kind": "一般", "note": "Cindy 向品牌確認吊牌、衣架與褲夾數量、試喝杯款式、餐點飲品，以及二樓打卡區是否同樣掃 QR Code。"}, {"no": 17, "city": "台中", "item": "台中場地場勘與丈量", "owner": "Lee", "start": "2026-10-16", "end": "2026-10-16", "done": false, "kind": "一般", "note": "Lee 到綠光計畫（臺中市西區中興一巷8號）丈量庭院入口、玻璃門面與主空間尺寸，作為台中設計與硬體的尺寸依據。"}, {"no": 18, "city": "台中", "item": "台中專屬輸出物設計", "owner": "Phoebe", "start": "2026-11-02", "end": "2026-11-13", "done": false, "kind": "一般", "note": "Phoebe 設計台中的玻璃卡典、掛布印刷與入口布條；拼圖海報與側邊布條沿用台北。"}, {"no": 19, "city": "台中", "item": "品牌回饋與修改", "owner": "Cindy", "start": "2026-11-16", "end": "2026-11-23", "done": false, "kind": "一般", "note": "Cindy 把台中設計交給品牌並收回修改意見，Phoebe 依意見修改；同一段時間 Lee 在做台北的完稿與發印。"}, {"no": 20, "city": "台中", "item": "品牌確認：需對色印刷品", "owner": "Cindy", "start": "2026-11-24", "end": "2026-11-24", "done": false, "kind": "截止", "note": "Cindy 必須在台北進場前取得品牌對台中需對色輸出物的確認，否則台中發印會延後。"}, {"no": 21, "city": "台中", "item": "完稿：需對色印刷品", "owner": "Lee", "start": "2026-11-25", "end": "2026-11-27", "done": false, "kind": "一般", "note": "Lee 在品牌確認後用三個工作天完成台中需對色品項的完稿，這三天與台北進場和開幕重疊。"}, {"no": 22, "city": "台中", "item": "品牌確認：一般印刷品", "owner": "Cindy", "start": "2026-11-27", "end": "2026-11-27", "done": false, "kind": "截止", "note": "Cindy 必須在這一天取得品牌對台中一般印刷品的確認，這一天是台北開幕日。"}, {"no": 23, "city": "台中", "item": "硬體定案下訂", "owner": "Lee", "start": "2026-11-27", "end": "2026-11-27", "done": false, "kind": "截止", "note": "Lee 在台中開幕前十個工作天確認紅龍柱、布簾、家具與燈光並下訂。"}, {"no": 24, "city": "台中", "item": "顏色打樣一次", "owner": "Lee", "start": "2026-11-30", "end": "2026-12-01", "done": false, "kind": "一般", "note": "Lee 請印刷廠打樣一次，拿樣品與品牌確認顏色，來回共兩個工作天。"}, {"no": 25, "city": "台中", "item": "台北撤場與共用物件運送", "owner": "Lee", "start": "2026-11-30", "end": "2026-12-01", "done": false, "kind": "一般", "note": "Lee 撤除台北佈置，把拼圖海報、側邊布條與可重複使用的道具打包運往台中。"}, {"no": 26, "city": "台中", "item": "完稿：一般印刷品", "owner": "Lee", "start": "2026-11-30", "end": "2026-12-02", "done": false, "kind": "一般", "note": "Lee 在品牌確認後用三個工作天完成台中一般印刷品的完稿。"}, {"no": 27, "city": "台中", "item": "全部印刷品發印", "owner": "Lee", "start": "2026-12-02", "end": "2026-12-02", "done": false, "kind": "截止", "note": "Lee 在台中開幕前七個工作天把全部完稿送印刷廠正式印製。"}, {"no": 28, "city": "台中", "item": "印製與交貨", "owner": "Lee", "start": "2026-12-03", "end": "2026-12-09", "done": false, "kind": "一般", "note": "Lee 追蹤印刷廠的印製進度與交貨日，確認成品在進場前送到。"}, {"no": 29, "city": "台中", "item": "進場搭建", "owner": "Lee", "start": "2026-12-10", "end": "2026-12-10", "done": false, "kind": "一般", "note": "Lee 帶搭建團隊進場佈置台中場地，完成後逐區檢查。"}, {"no": 30, "city": "台中", "item": "台中快閃活動", "owner": "全員", "start": "2026-12-11", "end": "2026-12-13", "done": false, "kind": "活動", "note": "台中站舉行三天，在地 KOL 與城市限定內容在這三天釋出。"}], "contacts": [{"nick": "Cindy", "phone": "", "tel": "", "role": "PM、場地對接"}, {"nick": "Lee", "phone": "0975-077-253", "tel": "+886975077253", "role": "輸出、搭建、完稿"}, {"nick": "Phoebe", "phone": "", "tel": "", "role": "設計"}], "rules": ["印刷與輸出物必須在開幕前 7 個工作天發印；發印用的完稿要在品牌確認後 3 個工作天完成。", "需對色的品項（布條、印刷圖片簾、打卡區拼圖海報、牆面形象照片、品牌橘色大紙袋）另加一次打樣，來回 2 個工作天，所以品牌確認要再提早。", "燈光、音響、家具等硬體必須在開幕前 10 個工作天定案下訂。工作天不含週末與國定假日（10/9、10/26、12/25）。"], "source": {"version": "Hachuu_雙城快閃_工作進度甘特圖.xlsx", "built": "2026-09-28 14:55", "sha256": "296e85e7043d"}}</script>
+<footer>資料：Hachuu_雙城快閃_工作進度甘特圖.xlsx（2026-09-28 15:08 產生）。完成狀態以產生當下工作簿的勾選為準。</footer>
+<script id="data" type="application/json">{"city": "台中", "eventDate": "2026-12-11", "eventEnd": "2026-12-13", "eventName": "台中快閃活動", "tasks": [{"no": 1, "city": "共同", "item": "場地與品牌待確認事項", "owner": "Cindy", "start": "2026-09-29", "end": "2026-10-16", "done": false, "kind": "一般", "note": "Cindy 向品牌確認吊牌、衣架與褲夾數量、試喝杯款式、餐點飲品，以及二樓打卡區是否同樣掃 QR Code。"}, {"no": 17, "city": "台中", "item": "台中場地場勘與丈量", "owner": "Lee", "start": "2026-10-16", "end": "2026-10-16", "done": false, "kind": "一般", "note": "Lee 到綠光計畫（臺中市西區中興一巷8號）丈量庭院入口、玻璃門面與主空間尺寸，作為台中設計與硬體的尺寸依據。"}, {"no": 18, "city": "台中", "item": "台中專屬輸出物設計", "owner": "Phoebe", "start": "2026-11-02", "end": "2026-11-13", "done": false, "kind": "一般", "note": "Phoebe 設計台中的玻璃卡典、掛布印刷與入口布條；拼圖海報與側邊布條沿用台北。"}, {"no": 19, "city": "台中", "item": "品牌回饋與修改", "owner": "Cindy", "start": "2026-11-16", "end": "2026-11-23", "done": false, "kind": "一般", "note": "Cindy 把台中設計交給品牌並收回修改意見，Phoebe 依意見修改；同一段時間 Lee 在做台北的完稿與發印。"}, {"no": 20, "city": "台中", "item": "品牌確認：需對色印刷品", "owner": "Cindy", "start": "2026-11-24", "end": "2026-11-24", "done": false, "kind": "截止", "note": "Cindy 必須在台北進場前取得品牌對台中需對色輸出物的確認，否則台中發印會延後。"}, {"no": 21, "city": "台中", "item": "完稿：需對色印刷品", "owner": "Lee", "start": "2026-11-25", "end": "2026-11-27", "done": false, "kind": "一般", "note": "Lee 在品牌確認後用三個工作天完成台中需對色品項的完稿，這三天與台北進場和開幕重疊。"}, {"no": 22, "city": "台中", "item": "品牌確認：一般印刷品", "owner": "Cindy", "start": "2026-11-27", "end": "2026-11-27", "done": false, "kind": "截止", "note": "Cindy 必須在這一天取得品牌對台中一般印刷品的確認，這一天是台北開幕日。"}, {"no": 23, "city": "台中", "item": "硬體定案下訂", "owner": "Lee", "start": "2026-11-27", "end": "2026-11-27", "done": false, "kind": "截止", "note": "Lee 在台中開幕前十個工作天確認紅龍柱、布簾、家具與燈光並下訂。"}, {"no": 24, "city": "台中", "item": "顏色打樣一次", "owner": "Lee", "start": "2026-11-30", "end": "2026-12-01", "done": false, "kind": "一般", "note": "Lee 請印刷廠打樣一次，拿樣品與品牌確認顏色，來回共兩個工作天。"}, {"no": 25, "city": "台中", "item": "台北撤場與共用物件運送", "owner": "Lee", "start": "2026-11-30", "end": "2026-12-01", "done": false, "kind": "一般", "note": "Lee 撤除台北佈置，把拼圖海報、側邊布條與可重複使用的道具打包運往台中。"}, {"no": 26, "city": "台中", "item": "完稿：一般印刷品", "owner": "Lee", "start": "2026-11-30", "end": "2026-12-02", "done": false, "kind": "一般", "note": "Lee 在品牌確認後用三個工作天完成台中一般印刷品的完稿。"}, {"no": 27, "city": "台中", "item": "全部印刷品發印", "owner": "Lee", "start": "2026-12-02", "end": "2026-12-02", "done": false, "kind": "截止", "note": "Lee 在台中開幕前七個工作天把全部完稿送印刷廠正式印製。"}, {"no": 28, "city": "台中", "item": "印製與交貨", "owner": "Lee", "start": "2026-12-03", "end": "2026-12-09", "done": false, "kind": "一般", "note": "Lee 追蹤印刷廠的印製進度與交貨日，確認成品在進場前送到。"}, {"no": 29, "city": "台中", "item": "進場搭建", "owner": "Lee", "start": "2026-12-10", "end": "2026-12-10", "done": false, "kind": "一般", "note": "Lee 帶搭建團隊進場佈置台中場地，完成後逐區檢查。"}, {"no": 30, "city": "台中", "item": "台中快閃活動", "owner": "全員", "start": "2026-12-11", "end": "2026-12-13", "done": false, "kind": "活動", "note": "台中站舉行三天，在地 KOL 與城市限定內容在這三天釋出。"}], "contacts": [{"nick": "Cindy", "phone": "", "tel": "", "role": "PM、場地對接"}, {"nick": "Lee", "phone": "0975-077-253", "tel": "+886975077253", "role": "輸出、搭建、完稿"}, {"nick": "Phoebe", "phone": "", "tel": "", "role": "設計"}], "rules": ["印刷與輸出物必須在開幕前 7 個工作天發印；發印用的完稿要在品牌確認後 3 個工作天完成。", "需對色的品項（布條、印刷圖片簾、打卡區拼圖海報、牆面形象照片、品牌橘色大紙袋）另加一次打樣，來回 2 個工作天，所以品牌確認要再提早。", "燈光、音響、家具等硬體必須在開幕前 10 個工作天定案下訂。工作天不含週末與國定假日（10/9、10/26、12/25）。"], "source": {"version": "Hachuu_雙城快閃_工作進度甘特圖.xlsx", "built": "2026-09-28 15:08", "sha256": "296e85e7043d"}}</script>
 <script>
 const D = JSON.parse(document.getElementById('data').textContent);
 const W = '日一二三四五六';
@@ -198,6 +206,43 @@ document.querySelectorAll('.tabs button').forEach(b => b.onclick = () => {
   window.scrollTo(0, 0);
 });
 renderTel(); tick(); setInterval(tick, 30000);
+</script>
+<script>
+(function () {
+  const TH = 80;                       // 手指往下拉超過 80px 放開才重新整理，避免碰一下就觸發
+  const bar = document.createElement('div');
+  bar.className = 'ptr'; bar.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(bar);
+  const atTop = () => (window.scrollY || document.documentElement.scrollTop || 0) <= 0;
+  let y0 = null, dy = 0;
+  function reset() { bar.classList.add('back'); bar.classList.remove('ready'); bar.style.transform = ''; y0 = null; dy = 0; }
+  addEventListener('touchstart', e => {
+    y0 = (e.touches.length === 1 && atTop() && !document.body.classList.contains('timing')) ? e.touches[0].clientY : null;
+    dy = 0;
+  }, {passive: true});
+  addEventListener('touchmove', e => {
+    if (y0 === null) return;
+    dy = e.touches[0].clientY - y0;
+    if (dy <= 0 || !atTop()) { reset(); return; }
+    bar.classList.remove('back');
+    bar.style.transform = `translateY(${Math.min(dy * 0.6, 70)}px)`;
+    const ready = dy >= TH;
+    bar.classList.toggle('ready', ready);
+    bar.textContent = ready ? '放開重新整理' : '下拉重新整理';
+  }, {passive: true});
+  addEventListener('touchend', () => {
+    if (y0 !== null && dy >= TH) {
+      // 加到 iPhone 主畫面後，一般的重新載入常拿到快取的舊版（Lee 2026-09-28）：
+      // 先跳過快取重抓原網址（順便把快取換成新版，下次從桌面開也是新的），再用帶時間戳的網址打開
+      bar.textContent = '重新整理中…';
+      const go = () => location.replace(location.pathname + '?r=' + Date.now() + location.hash);
+      fetch(location.pathname, {cache: 'reload'}).then(go, go);
+      return;
+    }
+    reset();
+  });
+  addEventListener('touchcancel', reset);
+})();
 </script>
 <!--mv-pagecount v1-->
 <script>(function(){try{var K="mv_device_id",i=localStorage.getItem(K);if(!i){i=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():String(Date.now())+Math.random().toString(36).slice(2);localStorage.setItem(K,i);}var u="https://mv-count.tatujinx.workers.dev/hit?p=HACHUU-1211-TXG&d="+encodeURIComponent(i);if(navigator.sendBeacon){navigator.sendBeacon(u);}else{fetch(u,{mode:"no-cors",keepalive:true});}}catch(e){}})();</script>
