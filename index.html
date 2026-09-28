@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="format-detection" content="telephone=no">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#1d1d22">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="1211 台中">
+<title>1211 Hachuu 台中快閃工作時間表</title>
+<style>
+/* 固定深色，跟活動當天的時程頁同一套色票 */
+:root{
+  --bg:#121215;--card:#1d1d22;--ink:#f2f2f4;--ink2:#b5b5bd;--ink3:#84848d;--line:#33333a;
+  --red:#ff4d5a;--red-dark:#e0303e;--red-soft:#3a1b1f;--now:#ff4d5a;--soon:#f0b429;
+  --f-big:34px;--f-h:19px;--f-body:17px;--f-small:15px;--f-tiny:13px;
+  --tap:48px;--r:14px;--r-sm:10px;--pad:16px;--shell:600px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);
+  font-family:-apple-system,"PingFang TC","Heiti TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;
+  font-size:var(--f-body);line-height:1.45;padding-bottom:calc(24px + env(safe-area-inset-bottom))}
+a{color:inherit}
+button,select{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer}
+.num{font-variant-numeric:tabular-nums}
+.top{position:sticky;top:0;z-index:20;background:var(--card);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
+.top .in{max-width:var(--shell);margin:0 auto;padding:10px var(--pad)}
+.row1{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-size:var(--f-small);font-weight:700;color:var(--ink2);flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand b{color:var(--red)}
+.clock{flex:none;font-size:22px;font-weight:800;line-height:1}
+.tabs{display:flex;gap:6px;margin-top:10px;background:var(--bg);border-radius:12px;padding:4px}
+.tabs button{flex:1;min-height:44px;border-radius:9px;font-size:var(--f-body);font-weight:700;color:var(--ink2)}
+.tabs button[aria-current=page]{background:var(--card);color:var(--ink)}
+main{max-width:var(--shell);margin:0 auto;padding:12px var(--pad) 0}
+.view{display:none}.view.on{display:block}
+h2{font-size:var(--f-h);font-weight:800;margin:20px 0 8px}
+h2 .n{font-size:var(--f-small);color:var(--ink3);font-weight:700;margin-left:6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px var(--pad);margin-bottom:12px}
+.evt{background:#2a1418;border-color:var(--red)}
+.evt .big{font-size:var(--f-big);font-weight:800;line-height:1.1}
+.evt .big small{font-size:var(--f-h);font-weight:700;margin-left:4px}
+.evt .sub{font-size:var(--f-body);color:var(--ink2);margin-top:6px}
+.dl .k{font-size:var(--f-tiny);font-weight:700;color:var(--red);letter-spacing:.06em}
+.dl .big{font-size:28px;font-weight:800;margin-top:2px}
+.dl .big small{font-size:var(--f-body);font-weight:700;color:var(--ink2);margin-left:6px}
+.dl .it{font-size:var(--f-h);font-weight:800;margin-top:6px}
+.dl .nt{font-size:var(--f-small);color:var(--ink2);margin-top:4px}
+.tasks{list-style:none}
+.task{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--line);border-radius:var(--r-sm);
+  padding:10px var(--pad);margin-bottom:8px}
+/* 負責人色條照聯絡表的順序配：第 1 位淺灰、第 2 位白、第 3 位中灰，之後循環 */
+.task.o0{border-left-color:#8a8a93}.task.o1{border-left-color:#f2f2f4}.task.o2{border-left-color:#5f5f68}
+.task.k-截止,.task.k-活動{border-left-color:var(--red)}
+.task.now{border-color:var(--now);box-shadow:0 0 0 1px var(--now) inset;border-left-width:6px}
+.task.late{background:var(--red-soft)}
+.task.done{opacity:.5}
+.task .l1{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.task .d{font-weight:800;font-size:var(--f-body)}
+.task .ow{font-size:var(--f-tiny);font-weight:700;color:var(--ink2);border:1px solid var(--line);border-radius:6px;padding:0 6px}
+.task .st{margin-left:auto;font-size:var(--f-tiny);font-weight:800;color:var(--ink2);white-space:nowrap}
+.task.now .st{color:var(--now)}.task.late .st{color:var(--red)}.task.soon .st{color:var(--soon)}
+.task .it{font-size:var(--f-body);font-weight:700;margin-top:3px}
+.task.k-截止 .it,.task.k-活動 .it{color:var(--red)}
+.task .nt{font-size:var(--f-small);color:var(--ink2);margin-top:2px}
+.empty{color:var(--ink3);font-size:var(--f-small);padding:4px 0 8px}
+.ctl{display:flex;gap:8px;margin-bottom:10px}
+.ctl select{flex:1;min-width:0;min-height:var(--tap);font-size:var(--f-body);font-weight:700;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--r-sm);padding:0 12px;-webkit-appearance:none;appearance:none}
+.ctl button{flex:none;min-height:var(--tap);padding:0 14px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--card);font-weight:700;font-size:var(--f-small)}
+.month{font-size:var(--f-small);font-weight:800;color:var(--ink3);letter-spacing:.06em;margin:18px 0 8px}
+.today-line{display:flex;align-items:center;gap:8px;color:var(--now);font-size:var(--f-tiny);font-weight:800;margin:10px 0}
+.today-line::before,.today-line::after{content:"";flex:1;height:2px;background:var(--now)}
+.rules{font-size:var(--f-small);color:var(--ink2);list-style:none}
+.rules li{padding:4px 0}
+.tel{list-style:none}
+.tel li{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px var(--pad);margin-bottom:10px}
+.tel .nick{font-size:22px;font-weight:800;line-height:1.2}
+.tel .note{font-size:var(--f-small);color:var(--ink2);margin-top:3px}
+.tel .call{display:flex;justify-content:center;align-items:center;gap:8px;width:100%;margin-top:10px;min-height:52px;
+  border-radius:999px;background:var(--red);color:#fff;text-decoration:none;font-size:var(--f-h);font-weight:700}
+.tel .call:active{background:var(--red-dark)}
+.tel .nophone{margin-top:10px;font-size:var(--f-small);color:var(--ink3)}
+footer{max-width:var(--shell);margin:24px auto 0;padding:0 var(--pad);font-size:var(--f-tiny);color:var(--ink3)}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <div class="row1"><div class="brand"><b>1211</b> Hachuu 台中快閃工作時間表</div><div class="clock num" id="clock"></div></div>
+  <div class="tabs" role="tablist">
+    <button type="button" data-v="now" aria-current="page">現在</button>
+    <button type="button" data-v="all" aria-current="false">全部</button>
+    <button type="button" data-v="tel" aria-current="false">電話</button>
+  </div>
+</div></header>
+<main>
+  <section class="view on" id="now"></section>
+  <section class="view" id="all"></section>
+  <section class="view" id="tel"></section>
+</main>
+<footer>資料：Hachuu_雙城快閃_工作進度甘特圖.xlsx（2026-09-28 14:55 產生）。完成狀態以產生當下工作簿的勾選為準。</footer>
+<script id="data" type="application/json">{"city": "台中", "eventDate": "2026-12-11", "eventEnd": "2026-12-13", "eventName": "台中快閃活動", "tasks": [{"no": 1, "city": "共同", "item": "場地與品牌待確認事項", "owner": "Cindy", "start": "2026-09-29", "end": "2026-10-16", "done": false, "kind": "一般", "note": "Cindy 向品牌確認吊牌、衣架與褲夾數量、試喝杯款式、餐點飲品，以及二樓打卡區是否同樣掃 QR Code。"}, {"no": 17, "city": "台中", "item": "台中場地場勘與丈量", "owner": "Lee", "start": "2026-10-16", "end": "2026-10-16", "done": false, "kind": "一般", "note": "Lee 到綠光計畫（臺中市西區中興一巷8號）丈量庭院入口、玻璃門面與主空間尺寸，作為台中設計與硬體的尺寸依據。"}, {"no": 18, "city": "台中", "item": "台中專屬輸出物設計", "owner": "Phoebe", "start": "2026-11-02", "end": "2026-11-13", "done": false, "kind": "一般", "note": "Phoebe 設計台中的玻璃卡典、掛布印刷與入口布條；拼圖海報與側邊布條沿用台北。"}, {"no": 19, "city": "台中", "item": "品牌回饋與修改", "owner": "Cindy", "start": "2026-11-16", "end": "2026-11-23", "done": false, "kind": "一般", "note": "Cindy 把台中設計交給品牌並收回修改意見，Phoebe 依意見修改；同一段時間 Lee 在做台北的完稿與發印。"}, {"no": 20, "city": "台中", "item": "品牌確認：需對色印刷品", "owner": "Cindy", "start": "2026-11-24", "end": "2026-11-24", "done": false, "kind": "截止", "note": "Cindy 必須在台北進場前取得品牌對台中需對色輸出物的確認，否則台中發印會延後。"}, {"no": 21, "city": "台中", "item": "完稿：需對色印刷品", "owner": "Lee", "start": "2026-11-25", "end": "2026-11-27", "done": false, "kind": "一般", "note": "Lee 在品牌確認後用三個工作天完成台中需對色品項的完稿，這三天與台北進場和開幕重疊。"}, {"no": 22, "city": "台中", "item": "品牌確認：一般印刷品", "owner": "Cindy", "start": "2026-11-27", "end": "2026-11-27", "done": false, "kind": "截止", "note": "Cindy 必須在這一天取得品牌對台中一般印刷品的確認，這一天是台北開幕日。"}, {"no": 23, "city": "台中", "item": "硬體定案下訂", "owner": "Lee", "start": "2026-11-27", "end": "2026-11-27", "done": false, "kind": "截止", "note": "Lee 在台中開幕前十個工作天確認紅龍柱、布簾、家具與燈光並下訂。"}, {"no": 24, "city": "台中", "item": "顏色打樣一次", "owner": "Lee", "start": "2026-11-30", "end": "2026-12-01", "done": false, "kind": "一般", "note": "Lee 請印刷廠打樣一次，拿樣品與品牌確認顏色，來回共兩個工作天。"}, {"no": 25, "city": "台中", "item": "台北撤場與共用物件運送", "owner": "Lee", "start": "2026-11-30", "end": "2026-12-01", "done": false, "kind": "一般", "note": "Lee 撤除台北佈置，把拼圖海報、側邊布條與可重複使用的道具打包運往台中。"}, {"no": 26, "city": "台中", "item": "完稿：一般印刷品", "owner": "Lee", "start": "2026-11-30", "end": "2026-12-02", "done": false, "kind": "一般", "note": "Lee 在品牌確認後用三個工作天完成台中一般印刷品的完稿。"}, {"no": 27, "city": "台中", "item": "全部印刷品發印", "owner": "Lee", "start": "2026-12-02", "end": "2026-12-02", "done": false, "kind": "截止", "note": "Lee 在台中開幕前七個工作天把全部完稿送印刷廠正式印製。"}, {"no": 28, "city": "台中", "item": "印製與交貨", "owner": "Lee", "start": "2026-12-03", "end": "2026-12-09", "done": false, "kind": "一般", "note": "Lee 追蹤印刷廠的印製進度與交貨日，確認成品在進場前送到。"}, {"no": 29, "city": "台中", "item": "進場搭建", "owner": "Lee", "start": "2026-12-10", "end": "2026-12-10", "done": false, "kind": "一般", "note": "Lee 帶搭建團隊進場佈置台中場地，完成後逐區檢查。"}, {"no": 30, "city": "台中", "item": "台中快閃活動", "owner": "全員", "start": "2026-12-11", "end": "2026-12-13", "done": false, "kind": "活動", "note": "台中站舉行三天，在地 KOL 與城市限定內容在這三天釋出。"}], "contacts": [{"nick": "Cindy", "phone": "", "tel": "", "role": "PM、場地對接"}, {"nick": "Lee", "phone": "0975-077-253", "tel": "+886975077253", "role": "輸出、搭建、完稿"}, {"nick": "Phoebe", "phone": "", "tel": "", "role": "設計"}], "rules": ["印刷與輸出物必須在開幕前 7 個工作天發印；發印用的完稿要在品牌確認後 3 個工作天完成。", "需對色的品項（布條、印刷圖片簾、打卡區拼圖海報、牆面形象照片、品牌橘色大紙袋）另加一次打樣，來回 2 個工作天，所以品牌確認要再提早。", "燈光、音響、家具等硬體必須在開幕前 10 個工作天定案下訂。工作天不含週末與國定假日（10/9、10/26、12/25）。"], "source": {"version": "Hachuu_雙城快閃_工作進度甘特圖.xlsx", "built": "2026-09-28 14:55", "sha256": "296e85e7043d"}}</script>
+<script>
+const D = JSON.parse(document.getElementById('data').textContent);
+const W = '日一二三四五六';
+const pad = n => String(n).padStart(2, '0');
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function today() { const d = new Date(); return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
+function days(a, b) { return Math.round((Date.parse(b + 'T00:00:00') - Date.parse(a + 'T00:00:00')) / 864e5); }
+function md(s) { const d = new Date(s + 'T00:00:00'); return `${d.getMonth()+1}/${d.getDate()}`; }
+function mdw(s) { const d = new Date(s + 'T00:00:00'); return `${d.getMonth()+1}/${d.getDate()}（${W[d.getDay()]}）`; }
+function range(t) { return t.start === t.end ? mdw(t.start) : `${md(t.start)}–${md(t.end)}`; }
+function state(t, now) {
+  if (t.done) return {cls: 'done', txt: '已完成'};
+  if (now > t.end) return {cls: 'late', txt: `逾期 ${days(t.end, now)} 天`};
+  if (now >= t.start) {
+    const left = days(now, t.end);
+    return {cls: 'now', txt: left === 0 ? '今天截止' : `進行中，還剩 ${left} 天`};
+  }
+  const n = days(now, t.start);
+  return {cls: n <= 3 ? 'soon' : '', txt: n === 1 ? '明天開始' : `${n} 天後開始`};
+}
+function item(t, now) {
+  const s = state(t, now);
+  const oi = D.contacts.findIndex(c => c.nick === t.owner);
+  return `<li class="task ${oi < 0 ? '' : 'o' + oi % 3} k-${esc(t.kind)} ${s.cls}"><div class="l1"><span class="d num">${range(t)}</span>` +
+    `<span class="ow">${esc(t.owner)}</span><span class="st">${s.txt}</span></div>` +
+    `<div class="it">${esc(t.item)}</div>${t.note ? `<div class="nt">${esc(t.note)}</div>` : ''}</li>`;
+}
+function list(ts, now, emptyTxt) {
+  return ts.length ? `<ul class="tasks">${ts.map(t => item(t, now)).join('')}</ul>` : `<div class="empty">${emptyTxt}</div>`;
+}
+function renderNow(now) {
+  let h = '';
+  const toOpen = days(now, D.eventDate);
+  if (now < D.eventDate) {
+    h += `<div class="card evt"><div class="big num">${toOpen}<small>天後開幕</small></div>` +
+      `<div class="sub">${esc(D.eventName)}：${mdw(D.eventDate)} 到 ${mdw(D.eventEnd)}</div></div>`;
+  } else if (now <= D.eventEnd) {
+    h += `<div class="card evt"><div class="big">活動第 ${days(D.eventDate, now) + 1} 天</div>` +
+      `<div class="sub">${esc(D.eventName)}：${mdw(D.eventDate)} 到 ${mdw(D.eventEnd)}</div></div>`;
+  } else {
+    h += `<div class="card evt"><div class="big">活動已於 ${md(D.eventEnd)} 結束</div></div>`;
+  }
+  const open = D.tasks.filter(t => !t.done);
+  const dl = open.filter(t => t.kind === '截止' && t.end >= now)[0];
+  if (dl) {
+    const n = days(now, dl.end);
+    h += `<div class="card dl"><div class="k">下一個截止</div><div class="big num">${mdw(dl.end)}<small>${n === 0 ? '就是今天' : `還有 ${n} 天`}</small></div>` +
+      `<div class="it">${esc(dl.item)}（${esc(dl.owner)}）</div><div class="nt">${esc(dl.note)}</div></div>`;
+  }
+  const late = open.filter(t => now > t.end);
+  if (late.length) h += `<h2>逾期未完成<span class="n">${late.length} 項</span></h2>` + list(late, now, '');
+  const cur = open.filter(t => t.start <= now && now <= t.end);
+  h += `<h2>進行中<span class="n">${cur.length} 項</span></h2>` + list(cur, now, '今天沒有進行中的工作。');
+  const soon = open.filter(t => t.start > now && days(now, t.start) <= 14);
+  h += `<h2>兩週內開始<span class="n">${soon.length} 項</span></h2>` + list(soon, now, '未來兩週沒有要開始的工作。');
+  document.getElementById('now').innerHTML = h;
+}
+let who = '';
+function renderAll(now) {
+  const owners = [...new Set(D.tasks.map(t => t.owner))];
+  let h = `<div class="ctl"><select id="who" aria-label="負責人"><option value="">全部負責人</option>` +
+    owners.map(o => `<option value="${esc(o)}"${o === who ? ' selected' : ''}>${esc(o)}</option>`).join('') +
+    `</select><button type="button" id="jump">跳到今天</button></div>`;
+  let month = '', marked = false;
+  for (const t of D.tasks.filter(t => !who || t.owner === who)) {
+    if (!marked && t.start > now) { h += '<div class="today-line" id="todayline">今天</div>'; marked = true; }
+    const m = t.start.slice(0, 7);
+    if (m !== month) { month = m; h += `<div class="month">${+m.slice(5)} 月</div>`; }
+    h += `<ul class="tasks">${item(t, now)}</ul>`;
+  }
+  if (!marked) h += '<div class="today-line" id="todayline">今天</div>';
+  if (D.rules.length) h += `<h2>排程規則</h2><ul class="rules">${D.rules.map(r => `<li>${esc(r)}</li>`).join('')}</ul>`;
+  const el = document.getElementById('all');
+  el.innerHTML = h;
+  el.querySelector('#who').onchange = e => { who = e.target.value; renderAll(today()); };
+  el.querySelector('#jump').onclick = () => document.getElementById('todayline').scrollIntoView({block: 'center'});
+}
+function renderTel() {
+  document.getElementById('tel').innerHTML = `<ul class="tel">${D.contacts.map(c =>
+    `<li><div class="nick">${esc(c.nick)}</div><div class="note">${esc(c.role)}</div>` +
+    (c.tel ? `<a class="call num" href="tel:${esc(c.tel)}">撥打 ${esc(c.phone)}</a>` : '<div class="nophone">電話未提供</div>') +
+    '</li>').join('')}</ul>`;
+}
+function tick() {
+  const d = new Date(), now = today();
+  document.getElementById('clock').textContent = `${d.getMonth()+1}/${d.getDate()}（${W[d.getDay()]}）`;
+  if (tick.last !== now) { tick.last = now; renderNow(now); renderAll(now); }
+}
+document.querySelectorAll('.tabs button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('.tabs button').forEach(x => x.setAttribute('aria-current', x === b ? 'page' : 'false'));
+  document.querySelectorAll('.view').forEach(v => v.classList.toggle('on', v.id === b.dataset.v));
+  window.scrollTo(0, 0);
+});
+renderTel(); tick(); setInterval(tick, 30000);
+</script>
+<!--mv-pagecount v1-->
+<script>(function(){try{var K="mv_device_id",i=localStorage.getItem(K);if(!i){i=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():String(Date.now())+Math.random().toString(36).slice(2);localStorage.setItem(K,i);}var u="https://mv-count.tatujinx.workers.dev/hit?p=HACHUU-1211-TXG&d="+encodeURIComponent(i);if(navigator.sendBeacon){navigator.sendBeacon(u);}else{fetch(u,{mode:"no-cors",keepalive:true});}}catch(e){}})();</script>
+</body>
+</html>
